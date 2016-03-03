@@ -88,6 +88,8 @@ public class Phone {
 		File fileName = new File("file.txt");
 		File tempFile =new File("temp.txt");
 		String line=null;
+		
+		String new_name = name.concat(" "+number);
 		boolean successful=false;
 		try{
 			FileReader fileReader = new FileReader(fileName);
@@ -95,16 +97,16 @@ public class Phone {
 			BufferedReader bufferedReader = new BufferedReader(fileReader);
 			BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
 			while((line=bufferedReader.readLine())!=null){
-				if(line.equals(name)||line.equals(number)){
+				if(line.equals(new_name)){
 					Scanner in =new Scanner (System.in);
 					System.out.println("Enter the new name to be entered : ");
-					String new_name;
-					new_name=in.nextLine();
+					String new__name;
+					new__name=in.nextLine();
 					System.out.println("Enter the new number to be entered : ");
 					String new_number;
 					new_number=in.nextLine();
-					new_name=new_name.concat(" "+new_number);
-					bufferedWriter.write(new_name);
+					new__name=new__name.concat(" "+new_number);
+					bufferedWriter.write(new__name);
 					bufferedWriter.newLine();
 				}
 				else{
