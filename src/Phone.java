@@ -32,24 +32,32 @@ public class Phone {
 		boolean successful=false;
 		try{
 			FileReader fileReader = new FileReader(fileName);
-			FileWriter fileWriter = new FileWriter(tempFile,true);
+			FileWriter fileWriter = new FileWriter(tempFile);
 			BufferedReader bufferedReader = new BufferedReader(fileReader);
 			BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
 			String line_to_delete=new_name;
 			while((line=bufferedReader.readLine())!=null){
 				if(line.equals(line_to_delete)){
+					//fileReader.remove(line);
+					successful=true;
 					continue;
 				}
 				else{
 					bufferedWriter.write(line);
 					bufferedWriter.newLine();
-					successful=true;
+					//successful=true;
 				}
 			}
 			bufferedReader.close();
 			bufferedWriter.close();
 			if(successful){
+				//System.out.println("Successful is : "+successful);
 				tempFile.renameTo(fileName);
+				//fileName.delete();
+				System.out.println(name+ " deleted. ");
+			}
+			else{
+				System.out.println("ERROR!! The name not found");
 			}
 		}
 		catch(FileNotFoundException ex){
@@ -85,6 +93,7 @@ public class Phone {
 		
 	}
 	public void changeEntry(String name,String number){
+		;
 		File fileName = new File("file.txt");
 		File tempFile =new File("temp.txt");
 		String line=null;
@@ -93,7 +102,7 @@ public class Phone {
 		boolean successful=false;
 		try{
 			FileReader fileReader = new FileReader(fileName);
-			FileWriter fileWriter = new FileWriter(tempFile,true);
+			FileWriter fileWriter = new FileWriter(tempFile);
 			BufferedReader bufferedReader = new BufferedReader(fileReader);
 			BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
 			while((line=bufferedReader.readLine())!=null){
@@ -108,17 +117,24 @@ public class Phone {
 					new__name=new__name.concat(" "+new_number);
 					bufferedWriter.write(new__name);
 					bufferedWriter.newLine();
+					successful=true;
 				}
 				else{
 					bufferedWriter.write(line);
 					bufferedWriter.newLine();
-					successful=true;
+					
 				}
 			}
 			bufferedReader.close();
 			bufferedWriter.close();
 			if(successful){
+				
 				tempFile.renameTo(fileName);
+				//fileName.delete();
+				
+			}
+			else{
+				System.out.println("ERROR. The name and number not found");
 			}
 		}
 		catch(FileNotFoundException ex){
