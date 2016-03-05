@@ -2,8 +2,31 @@ import java.io.*;
 import java.util.*;
 public class Phone {
 	String name,number;
-	
 	File tempFile= new File("temp.txt");
+	
+	public int checkValid(){
+		File fileName= new File("file.txt");
+		int temp=0;
+		try{
+			FileReader fileReader = new FileReader(fileName);
+			BufferedReader bufferedReader = new BufferedReader(fileReader);
+			int length=bufferedReader.read();
+			if(length==-1){
+				System.out.println("ERROR. The file is empty");
+				temp= -1;
+			}
+			
+			
+		}
+		
+		catch(FileNotFoundException ex){
+			System.out.println("Unable to oepn file");
+		}
+		catch(IOException ex){
+			System.out.println("File not opened.");
+		}
+		return temp;
+	}
 	public void addEntry(String name,String number){
 		//FileReader fileReader = new FileReader(fileName);
 		File fileName= new File("file.txt");
@@ -29,36 +52,31 @@ public class Phone {
 		String line=null;
 		String number=getNumber(name);
 		String new_name = name.concat(" "+number);
+		List<String> list = new ArrayList<String>();
 		boolean successful=false;
 		try{
-			FileReader fileReader = new FileReader(fileName);
-			FileWriter fileWriter = new FileWriter(tempFile);
-			BufferedReader bufferedReader = new BufferedReader(fileReader);
-			BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+			FileReader fileReader = new FileReader(fileName);			
+			BufferedReader bufferedReader = new BufferedReader(fileReader);			
 			String line_to_delete=new_name;
 			while((line=bufferedReader.readLine())!=null){
 				if(line.equals(line_to_delete)){
-					//fileReader.remove(line);
-					successful=true;
 					continue;
 				}
 				else{
-					bufferedWriter.write(line);
-					bufferedWriter.newLine();
-					//successful=true;
+					list.add(line);
 				}
 			}
 			bufferedReader.close();
+			FileWriter fileWriter = new FileWriter(fileName);
+			BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+			for(int i=0;i<list.size();i++){
+				bufferedWriter.write(list.get(i));
+				bufferedWriter.newLine();
+			}
+			
 			bufferedWriter.close();
-			if(successful){
-				//System.out.println("Successful is : "+successful);
-				tempFile.renameTo(fileName);
-				//fileName.delete();
-				System.out.println(name+ " deleted. ");
-			}
-			else{
-				System.out.println("ERROR!! The name not found");
-			}
+			System.out.println(name + " is deleted.");
+			
 		}
 		catch(FileNotFoundException ex){
 			System.out.println("Unable to oepn file");
@@ -73,6 +91,7 @@ public class Phone {
 		String a="",b="";
 		try{
 			x=new Scanner(new File("file.txt"));
+			
 			while(x.hasNext()){
 				a = x.next();
 				if(a.equals(name)){
@@ -93,18 +112,16 @@ public class Phone {
 		
 	}
 	public void changeEntry(String name,String number){
-		;
-		File fileName = new File("file.txt");
-		File tempFile =new File("temp.txt");
-		String line=null;
 		
+		File fileName = new File("file.txt");
+		File tempFile =new File("file.txt");
+		String line=null;		
 		String new_name = name.concat(" "+number);
-		boolean successful=false;
+		List<String> list = new ArrayList<String>();
 		try{
-			FileReader fileReader = new FileReader(fileName);
-			FileWriter fileWriter = new FileWriter(tempFile);
-			BufferedReader bufferedReader = new BufferedReader(fileReader);
-			BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+			FileReader fileReader = new FileReader(fileName);			
+			BufferedReader bufferedReader = new BufferedReader(fileReader);	
+			
 			while((line=bufferedReader.readLine())!=null){
 				if(line.equals(new_name)){
 					Scanner in =new Scanner (System.in);
@@ -115,27 +132,23 @@ public class Phone {
 					String new_number;
 					new_number=in.nextLine();
 					new__name=new__name.concat(" "+new_number);
-					bufferedWriter.write(new__name);
-					bufferedWriter.newLine();
-					successful=true;
+					list.add(new__name);
 				}
 				else{
-					bufferedWriter.write(line);
-					bufferedWriter.newLine();
+					list.add(line);
 					
 				}
 			}
 			bufferedReader.close();
+			FileWriter fileWriter = new FileWriter(fileName);
+			BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+			for(int i=0;i<list.size();i++){
+				bufferedWriter.write(list.get(i));
+				bufferedWriter.newLine();
+			}
+			
 			bufferedWriter.close();
-			if(successful){
-				
-				tempFile.renameTo(fileName);
-				//fileName.delete();
-				
-			}
-			else{
-				System.out.println("ERROR. The name and number not found");
-			}
+			
 		}
 		catch(FileNotFoundException ex){
 			System.out.println("Unable to oepn file");
