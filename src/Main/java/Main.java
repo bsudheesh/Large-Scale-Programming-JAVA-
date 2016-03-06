@@ -29,10 +29,6 @@ public class Main {
 				 */
 				object.addEntry(name, number);
 			}
-			/*
-			 * This will check to see that if the File is empty or not
-			 * If the file is empty, it will return -1 and the other functions won't execute
-			 */
 			else if(choice==2){
 							
 						Scanner name_object= new Scanner(System.in);
@@ -49,10 +45,15 @@ public class Main {
 					System.out.println("Enter the name whose number is to be found : ");
 					name = name_object.nextLine();
 					number=object.getNumber(name);
+					if(number.equals(null)){
+						System.out.println("ERROR! The name entered is not found");
+					}
 					/*
 					 * The name is passed as an argument and the number is returned back
 					 */
-					System.out.println("The number is : " + number);
+					else{
+						System.out.println("The number is : " + number);
+					}
 				}
 			else if(choice==4){
 					Scanner name_object= new Scanner(System.in);
