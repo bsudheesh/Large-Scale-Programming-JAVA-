@@ -33,12 +33,7 @@ public class Main {
 			 * This will check to see that if the File is empty or not
 			 * If the file is empty, it will return -1 and the other functions won't execute
 			 */
-			int length = object.checkValid();
-			if(length==-1){
-				System.out.println("ERROR!!. The File is empty");
-			}
-			else if(length==0){
-				if(choice==2){
+			else if(choice==2){
 							
 						Scanner name_object= new Scanner(System.in);
 						System.out.println("Enter the name to be deleted : ");
@@ -49,7 +44,7 @@ public class Main {
 						object.DeleteEntry(name);
 				}
 				
-				else if(choice==3){
+			else if(choice==3){
 					Scanner name_object= new Scanner(System.in);
 					System.out.println("Enter the name whose number is to be found : ");
 					name = name_object.nextLine();
@@ -59,7 +54,7 @@ public class Main {
 					 */
 					System.out.println("The number is : " + number);
 				}
-				else if(choice==4){
+			else if(choice==4){
 					Scanner name_object= new Scanner(System.in);
 					Scanner number_object= new Scanner(System.in);
 					System.out.println("Enter the name to be modified : ");
@@ -72,7 +67,7 @@ public class Main {
 					object.changeEntry(name, number);
 								
 				}
-			}
+			
 			else{
 				/*
 				 * If the user choice is invalid.
